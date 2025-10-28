@@ -298,8 +298,10 @@ window.addEventListener('load', function() {
 
 // Image Modal Functionality
 let currentImageIndex = 0;
-const imagePaths = [
-    // 12 carefully selected images from the Alcon BPI Clareon Launch (all from album-d445997216-downloads-pt1)
+
+// Alcon Project Images
+const alconImagePaths = [
+    // 12 carefully selected images from the Alcon BPI Clareon Launch
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3171-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3172-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3173-optimized.jpg',
@@ -314,14 +316,43 @@ const imagePaths = [
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3184-optimized.jpg'
 ];
 
-// Load project gallery after imagePaths is defined
-loadProjectGallery();
+// Booths Project Images
+const boothsImagePaths = [
+    'booths/1c337e6d-0201-4240-b5a4-02fbab60db2e-optimized.jpg',
+    'booths/56b22936-4eb6-4e60-b369-133594a9a0a8-optimized.jpg',
+    'booths/69f64f89-cc8a-49a8-96c5-9499e56efe3f-optimized.jpg',
+    'booths/7cfa7b72-9da3-4d41-8576-18b854bb203c-optimized.jpg',
+    'booths/81cdd79b-6e52-4ce5-b6df-1ed55038911d-optimized.jpg',
+    'booths/a7a7a6e7-639a-4104-832a-4b7bec7dc4bc-optimized.jpg',
+    'booths/cb3b1abc-1c6a-42c5-b719-efcd75460470-optimized.jpg',
+    'booths/cddfc840-e14c-4ba9-8941-fdeb419d0754-optimized.jpg',
+    'booths/d19ee69f-60d1-40c7-b6f2-34437aa0074a-optimized.jpg'
+];
+
+// Load project galleries after imagePaths are defined
+loadProjectGalleries();
+
+// Determine which image array to use based on current page
+function getCurrentImageArray() {
+    const currentPath = window.location.pathname;
+    
+    if (currentPath.includes('alcon')) {
+        return alconImagePaths;
+    } else if (currentPath.includes('booths')) {
+        return boothsImagePaths;
+    } else if (currentPath.includes('gallery.html')) {
+        return alconImagePaths; // Default to alcon for now
+    }
+    // For index page, check the modal's context
+    return alconImagePaths; // Default fallback
+}
 
 function openModal(imagePath) {
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     
-    currentImageIndex = imagePaths.indexOf(imagePath);
+    const currentArray = getCurrentImageArray();
+    currentImageIndex = currentArray.indexOf(imagePath);
     modalImage.src = imagePath;
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
@@ -334,16 +365,18 @@ function closeModal() {
 }
 
 function changeImage(direction) {
+    const currentArray = getCurrentImageArray();
     currentImageIndex += direction;
     
-    if (currentImageIndex >= imagePaths.length) {
+    if (currentImageIndex >= currentArray.length) {
         currentImageIndex = 0;
     } else if (currentImageIndex < 0) {
-        currentImageIndex = imagePaths.length - 1;
+        currentImageIndex = currentArray.length - 1;
     }
     
+    const currentArray = getCurrentImageArray();
     const modalImage = document.getElementById('modalImage');
-    modalImage.src = imagePaths[currentImageIndex];
+    modalImage.src = currentArray[currentImageIndex];
 }
 
 // Close modal when clicking outside the image
@@ -509,37 +542,59 @@ function initGalleryAnalytics() {
 })();
 
 // Contact Form Handler
-// Dynamic Project Gallery
-function loadProjectGallery() {
-    const projectGallery = document.getElementById('project-gallery-preview');
-    if (!projectGallery) return;
-    
-    // Create a shuffled copy of the imagePaths array
-    const shuffledImages = [...imagePaths].sort(() => Math.random() - 0.5);
-    
-    // Select first 6 images from the shuffled array
-    const projectImages = shuffledImages.slice(0, 6);
-    
-    // Clear existing content
-    projectGallery.innerHTML = '';
-    
-    // Create gallery items dynamically
-    projectImages.forEach((imagePath, index) => {
-        const galleryItem = document.createElement('div');
-        galleryItem.className = 'gallery-item';
-        galleryItem.onclick = () => openModal(imagePath);
+// Dynamic Project Galleries
+function loadProjectGalleries() {
+    // Load Alcon project preview
+    const alconPreview = document.getElementById('alcon-preview');
+    if (alconPreview) {
+        const shuffledAlcon = [...alconImagePaths].sort(() => Math.random() - 0.5);
+        const alconImages = shuffledAlcon.slice(0, 6);
         
-        galleryItem.innerHTML = `
-            <img src="${imagePath}" alt="Alcon BPI Clareon Launch Event" loading="lazy" width="300" height="300">
-            <div class="gallery-overlay">
-                <i class="fas fa-expand"></i>
-            </div>
-        `;
+        alconPreview.innerHTML = '';
         
-        projectGallery.appendChild(galleryItem);
-    });
+        alconImages.forEach((imagePath, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.onclick = () => openModal(imagePath);
+            
+            galleryItem.innerHTML = `
+                <img src="${imagePath}" alt="Alcon BPI Clareon Launch Event" loading="lazy">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                </div>
+            `;
+            
+            alconPreview.appendChild(galleryItem);
+        });
+        
+        console.log(`Loaded ${alconImages.length} Alcon preview images`);
+    }
     
-    console.log(`Loaded ${projectImages.length} randomized images for project gallery`);
+    // Load Booths project preview
+    const boothsPreview = document.getElementById('booths-preview');
+    if (boothsPreview) {
+        const shuffledBooths = [...boothsImagePaths].sort(() => Math.random() - 0.5);
+        const boothsImages = shuffledBooths.slice(0, 6);
+        
+        boothsPreview.innerHTML = '';
+        
+        boothsImages.forEach((imagePath, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.onclick = () => openModal(imagePath);
+            
+            galleryItem.innerHTML = `
+                <img src="${imagePath}" alt="Exhibition Booth Design" loading="lazy">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                </div>
+            `;
+            
+            boothsPreview.appendChild(galleryItem);
+        });
+        
+        console.log(`Loaded ${boothsImages.length} Booths preview images`);
+    }
 }
 
 // Initialize project gallery when DOM is loaded
