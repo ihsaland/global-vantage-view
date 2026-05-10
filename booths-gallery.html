@@ -91,71 +91,19 @@
                         <span class="stat-number">Various Events</span>
                         <span class="stat-label">Events</span>
                     </div>
+                    <div class="stat-item">
+                        <span class="stat-number">9</span>
+                        <span class="stat-label">Photos</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Full Gallery -->
+    <!-- Full Gallery — populated dynamically from boothsImagePaths in script.js -->
     <section class="full-gallery">
         <div class="container">
-            <div class="gallery-grid">
-                <!-- 9 exhibition booth images -->
-                <div class="gallery-item" onclick="openModal('booths/1c337e6d-0201-4240-b5a4-02fbab60db2e-optimized.jpg')">
-                    <img src="booths/1c337e6d-0201-4240-b5a4-02fbab60db2e-optimized.jpg" alt="Exhibition Booth Design" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('booths/56b22936-4eb6-4e60-b369-133594a9a0a8-optimized.jpg')">
-                    <img src="booths/56b22936-4eb6-4e60-b369-133594a9a0a8-optimized.jpg" alt="Exhibition Booth Design" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('booths/69f64f89-cc8a-49a8-96c5-9499e56efe3f-optimized.jpg')">
-                    <img src="booths/69f64f89-cc8a-49a8-96c5-9499e56efe3f-optimized.jpg" alt="Exhibition Booth Design" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('booths/7cfa7b72-9da3-4d41-8576-18b854bb203c-optimized.jpg')">
-                    <img src="booths/7cfa7b72-9da3-4d41-8576-18b854bb203c-optimized.jpg" alt="Exhibition Booth Design" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('booths/81cdd79b-6e52-4ce5-b6df-1ed55038911d-optimized.jpg')">
-                    <img src="booths/81cdd79b-6e52-4ce5-b6df-1ed55038911d-optimized.jpg" alt="Exhibition Booth Design" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('booths/a7a7a6e7-639a-4104-832a-4b7bec7dc4bc-optimized.jpg')">
-                    <img src="booths/a7a7a6e7-639a-4104-832a-4b7bec7dc4bc-optimized.jpg" alt="Exhibition Booth Design" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('booths/cb3b1abc-1c6a-42c5-b719-efcd75460470-optimized.jpg')">
-                    <img src="booths/cb3b1abc-1c6a-42c5-b719-efcd75460470-optimized.jpg" alt="Exhibition Booth Design" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('booths/cddfc840-e14c-4ba9-8941-fdeb419d0754-optimized.jpg')">
-                    <img src="booths/cddfc840-e14c-4ba9-8941-fdeb419d0754-optimized.jpg" alt="Exhibition Booth Design" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('booths/d19ee69f-60d1-40c7-b6f2-34437aa0074a-optimized.jpg')">
-                    <img src="booths/d19ee69f-60d1-40c7-b6f2-34437aa0074a-optimized.jpg" alt="Exhibition Booth Design" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-            </div>
+            <div class="gallery-grid" id="booths-full-grid"></div>
         </div>
     </section>
 
@@ -176,45 +124,74 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Vantage View</h3>
-                    <p>Creating unforgettable experiences that connect brands with their audiences.</p>
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <div class="footer-logo">Vantage View</div>
+                    <p class="footer-tagline">Full-service event management &amp; marketing agency crafting premium experiences across Trinidad &amp; Tobago and the wider Caribbean.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Instagram" class="footer-social"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="LinkedIn" class="footer-social"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="TikTok" class="footer-social"><i class="fab fa-tiktok"></i></a>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="index.html#about">About Us</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#projects">Projects</a></li>
+                <div class="footer-col">
+                    <h4 class="footer-col-heading">Services</h4>
+                    <ul class="footer-col-links">
+                        <li><a href="index.html#services">Event Planning &amp; Management</a></li>
+                        <li><a href="index.html#services">Corporate Events</a></li>
+                        <li><a href="index.html#services">Exhibition Booths</a></li>
+                        <li><a href="index.html#services">Social Media Management</a></li>
+                        <li><a href="index.html#services">Sponsorship &amp; Partnerships</a></li>
+                        <li><a href="index.html#services">Event Branding &amp; Creative</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> vantageviewtnt@gmail.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Trinidad & Tobago</p>
-                    </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-heading">Company</h4>
+                    <ul class="footer-col-links">
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#process">How We Work</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="index.html#projects">Projects</a></li>
+                        <li><a href="index.html#testimonials">Testimonials</a></li>
+                        <li><a href="index.html#clients">Our Clients</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-contact-col">
+                    <h4 class="footer-col-heading">Get in Touch</h4>
+                    <ul class="footer-col-links">
+                        <li><a href="mailto:Vantageviewtnt@gmail.com"><i class="fas fa-envelope"></i> Vantageviewtnt@gmail.com</a></li>
+                        <li><a href="https://wa.me/18680000000" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp Us</a></li>
+                        <li><span><i class="fas fa-map-marker-alt"></i> Trinidad &amp; Tobago</span></li>
+                        <li><span><i class="fas fa-globe"></i> Serving the Caribbean</span></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Vantage View. All rights reserved.</p>
+                <p>&copy; <span class="cy"></span> Vantage View. All rights reserved.</p>
+                <p class="footer-bottom-right">Crafted with care in Trinidad &amp; Tobago&nbsp;&nbsp;🇹🇹</p>
             </div>
         </div>
     </footer>
 
     <!-- Image Modal -->
     <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
-        <div class="modal-nav">
-            <button class="nav-btn prev" onclick="changeImage(-1)">&#10094;</button>
-            <button class="nav-btn next" onclick="changeImage(1)">&#10095;</button>
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="Exhibition Booth Design">
+            <div class="modal-nav">
+                <button class="modal-btn prev" onclick="changeImage(-1)">&#10094;</button>
+                <button class="modal-btn next" onclick="changeImage(1)">&#10095;</button>
+            </div>
         </div>
     </div>
 
     <!-- Scripts -->
     <script src="script.js"></script>
+    <script>
+        document.querySelectorAll('.cy').forEach(el => el.textContent = new Date().getFullYear());
+        loadFullGallery('booths-full-grid', boothsImagePaths, 'Exhibition Booth Design');
+    </script>
 </body>
 </html>
 

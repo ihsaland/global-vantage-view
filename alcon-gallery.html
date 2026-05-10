@@ -91,89 +91,19 @@
                         <span class="stat-number">2025</span>
                         <span class="stat-label">Year</span>
                     </div>
+                    <div class="stat-item">
+                        <span class="stat-number">25</span>
+                        <span class="stat-label">Photos</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Full Gallery -->
+    <!-- Full Gallery — populated dynamically from alconImagePaths in script.js -->
     <section class="full-gallery">
         <div class="container">
-            <div class="gallery-grid">
-                <!-- 12 carefully selected images from the Alcon BPI Clareon Launch -->
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3171-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3171-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3172-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3172-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3173-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3173-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3174-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3174-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3175-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3175-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3176-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3176-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3177-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3177-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3178-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3178-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3179-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3179-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3182-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3182-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3183-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3183-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-                <div class="gallery-item" onclick="openModal('ALCON Images/album-d445997216-downloads-pt1/IMGL3184-optimized.jpg')">
-                    <img src="ALCON Images/album-d445997216-downloads-pt1/IMGL3184-optimized.jpg" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-expand"></i>
-                    </div>
-                </div>
-            </div>
+            <div class="gallery-grid" id="alcon-full-grid"></div>
         </div>
     </section>
 
@@ -194,44 +124,73 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Vantage View</h3>
-                    <p>Creating unforgettable experiences that connect brands with their audiences.</p>
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <div class="footer-logo">Vantage View</div>
+                    <p class="footer-tagline">Full-service event management &amp; marketing agency crafting premium experiences across Trinidad &amp; Tobago and the wider Caribbean.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Instagram" class="footer-social"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="LinkedIn" class="footer-social"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="TikTok" class="footer-social"><i class="fab fa-tiktok"></i></a>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="index.html#about">About Us</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#projects">Projects</a></li>
+                <div class="footer-col">
+                    <h4 class="footer-col-heading">Services</h4>
+                    <ul class="footer-col-links">
+                        <li><a href="index.html#services">Event Planning &amp; Management</a></li>
+                        <li><a href="index.html#services">Corporate Events</a></li>
+                        <li><a href="index.html#services">Exhibition Booths</a></li>
+                        <li><a href="index.html#services">Social Media Management</a></li>
+                        <li><a href="index.html#services">Sponsorship &amp; Partnerships</a></li>
+                        <li><a href="index.html#services">Event Branding &amp; Creative</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> vantageviewtnt@gmail.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Trinidad & Tobago</p>
-                    </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-heading">Company</h4>
+                    <ul class="footer-col-links">
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#process">How We Work</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="index.html#projects">Projects</a></li>
+                        <li><a href="index.html#testimonials">Testimonials</a></li>
+                        <li><a href="index.html#clients">Our Clients</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-contact-col">
+                    <h4 class="footer-col-heading">Get in Touch</h4>
+                    <ul class="footer-col-links">
+                        <li><a href="mailto:Vantageviewtnt@gmail.com"><i class="fas fa-envelope"></i> Vantageviewtnt@gmail.com</a></li>
+                        <li><a href="https://wa.me/18680000000" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp Us</a></li>
+                        <li><span><i class="fas fa-map-marker-alt"></i> Trinidad &amp; Tobago</span></li>
+                        <li><span><i class="fas fa-globe"></i> Serving the Caribbean</span></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Vantage View. All rights reserved.</p>
+                <p>&copy; <span class="cy"></span> Vantage View. All rights reserved.</p>
+                <p class="footer-bottom-right">Crafted with care in Trinidad &amp; Tobago&nbsp;&nbsp;🇹🇹</p>
             </div>
         </div>
     </footer>
 
     <!-- Image Modal -->
     <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
-        <div class="modal-nav">
-            <button class="nav-btn prev" onclick="changeImage(-1)">&#10094;</button>
-            <button class="nav-btn next" onclick="changeImage(1)">&#10095;</button>
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="Alcon BPI Clareon Launch Event">
+            <div class="modal-nav">
+                <button class="modal-btn prev" onclick="changeImage(-1)">&#10094;</button>
+                <button class="modal-btn next" onclick="changeImage(1)">&#10095;</button>
+            </div>
         </div>
     </div>
 
     <!-- Scripts -->
     <script src="script.js"></script>
+    <script>
+        document.querySelectorAll('.cy').forEach(el => el.textContent = new Date().getFullYear());
+        loadFullGallery('alcon-full-grid', alconImagePaths, 'Alcon BPI Clareon Launch');
+    </script>
 </body>
 </html>

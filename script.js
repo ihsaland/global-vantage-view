@@ -131,10 +131,7 @@ window.addEventListener('scroll', () => {
 const style = document.createElement('style');
 style.textContent = `
     .nav-link.active {
-        color: #2563eb !important;
-    }
-    .nav-link.active::after {
-        width: 100% !important;
+        color: #A78BFA !important;
     }
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
@@ -272,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLazyLoading();
     
     // Initialize intersection observer for animations
-    initScrollAnimations();
+    // (handled by the global observer above)
     
     // Project gallery will be loaded after imagePaths is defined
     
@@ -299,9 +296,8 @@ window.addEventListener('load', function() {
 // Image Modal Functionality
 let currentImageIndex = 0;
 
-// Alcon Project Images
+// Alcon Project Images — all 25 optimized photos
 const alconImagePaths = [
-    // 12 carefully selected images from the Alcon BPI Clareon Launch
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3171-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3172-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3173-optimized.jpg',
@@ -313,7 +309,20 @@ const alconImagePaths = [
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3179-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3182-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3183-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3184-optimized.jpg'
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3184-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3186-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3191-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3194-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3198-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3201-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3202-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3203-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3207-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3209-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3211-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3212-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3213-optimized.jpg',
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3214-optimized.jpg',
 ];
 
 // Booths Project Images
@@ -328,6 +337,10 @@ const boothsImagePaths = [
     'booths/cddfc840-e14c-4ba9-8941-fdeb419d0754-optimized.jpg',
     'booths/d19ee69f-60d1-40c7-b6f2-34437aa0074a-optimized.jpg'
 ];
+
+// Cover photos — pinned first for each project card
+const alconCover  = 'ALCON Images/album-d445997216-downloads-pt1/IMGL3171-optimized.jpg';
+const boothsCover = 'booths/1c337e6d-0201-4240-b5a4-02fbab60db2e-optimized.jpg';
 
 // Load project galleries after imagePaths are defined
 loadProjectGalleries();
@@ -367,14 +380,13 @@ function closeModal() {
 function changeImage(direction) {
     const currentArray = getCurrentImageArray();
     currentImageIndex += direction;
-    
+
     if (currentImageIndex >= currentArray.length) {
         currentImageIndex = 0;
     } else if (currentImageIndex < 0) {
         currentImageIndex = currentArray.length - 1;
     }
-    
-    const currentArray = getCurrentImageArray();
+
     const modalImage = document.getElementById('modalImage');
     modalImage.src = currentArray[currentImageIndex];
 }
@@ -534,6 +546,17 @@ function initGalleryAnalytics() {
     }
 }
 
+// Select placeholder color — update on change
+document.querySelectorAll('.form-group select').forEach(sel => {
+    sel.addEventListener('change', function() {
+        if (this.value) {
+            this.classList.add('has-value');
+        } else {
+            this.classList.remove('has-value');
+        }
+    });
+});
+
 // EmailJS Configuration
 (function() {
     // Initialize EmailJS with your Public Key
@@ -542,59 +565,58 @@ function initGalleryAnalytics() {
 })();
 
 // Contact Form Handler
-// Dynamic Project Galleries
+// Dynamic Project Galleries (homepage preview)
+function buildProjectPreview(containerEl, imagePaths, altText, coverImage) {
+    // Cover always first; shuffle the rest
+    const rest = imagePaths.filter(p => p !== coverImage);
+    const shuffled = [...rest].sort(() => Math.random() - 0.5);
+    const preview = [coverImage, ...shuffled].slice(0, 5);
+    const remaining = imagePaths.length - 5;
+
+    containerEl.innerHTML = '';
+
+    preview.forEach((imagePath, index) => {
+        const item = document.createElement('div');
+        item.className = index === 0 ? 'gallery-item gallery-item-featured' : 'gallery-item';
+        item.onclick = () => openModal(imagePath);
+
+        const moreLabel = (index === 4 && remaining > 0)
+            ? `<div class="gallery-more-badge">+${remaining} more</div>`
+            : '';
+
+        item.innerHTML = `
+            <img src="${imagePath}" alt="${altText}" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+            ${moreLabel}
+        `;
+
+        containerEl.appendChild(item);
+    });
+}
+
 function loadProjectGalleries() {
-    // Load Alcon project preview
     const alconPreview = document.getElementById('alcon-preview');
-    if (alconPreview) {
-        const shuffledAlcon = [...alconImagePaths].sort(() => Math.random() - 0.5);
-        const alconImages = shuffledAlcon.slice(0, 6);
-        
-        alconPreview.innerHTML = '';
-        
-        alconImages.forEach((imagePath, index) => {
-            const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item';
-            galleryItem.onclick = () => openModal(imagePath);
-            
-            galleryItem.innerHTML = `
-                <img src="${imagePath}" alt="Alcon BPI Clareon Launch Event" loading="lazy">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
-            `;
-            
-            alconPreview.appendChild(galleryItem);
-        });
-        
-        console.log(`Loaded ${alconImages.length} Alcon preview images`);
-    }
-    
-    // Load Booths project preview
+    if (alconPreview) buildProjectPreview(alconPreview, alconImagePaths, 'Alcon BPI Clareon Launch', alconCover);
+
     const boothsPreview = document.getElementById('booths-preview');
-    if (boothsPreview) {
-        const shuffledBooths = [...boothsImagePaths].sort(() => Math.random() - 0.5);
-        const boothsImages = shuffledBooths.slice(0, 6);
-        
-        boothsPreview.innerHTML = '';
-        
-        boothsImages.forEach((imagePath, index) => {
-            const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item';
-            galleryItem.onclick = () => openModal(imagePath);
-            
-            galleryItem.innerHTML = `
-                <img src="${imagePath}" alt="Exhibition Booth Design" loading="lazy">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
-            `;
-            
-            boothsPreview.appendChild(galleryItem);
-        });
-        
-        console.log(`Loaded ${boothsImages.length} Booths preview images`);
-    }
+    if (boothsPreview) buildProjectPreview(boothsPreview, boothsImagePaths, 'Exhibition Booth Design', boothsCover);
+}
+
+// Full gallery pages — render all photos into a grid
+function loadFullGallery(gridId, imagePaths, altText) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    grid.innerHTML = '';
+    imagePaths.forEach(imagePath => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.onclick = () => openModal(imagePath);
+        item.innerHTML = `
+            <img src="${imagePath}" alt="${altText}" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+        `;
+        grid.appendChild(item);
+    });
 }
 
 // Initialize project gallery when DOM is loaded
@@ -759,5 +781,25 @@ if ('serviceWorker' in navigator) {
             .catch(registrationError => {
                 console.log('SW registration failed: ', registrationError);
             });
+    });
+}
+
+// Dynamic copyright year
+const copyrightYear = document.getElementById('copyright-year');
+if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
+
+// Back-to-top button
+const backToTop = document.getElementById('backToTop');
+if (backToTop) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
