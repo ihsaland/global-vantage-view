@@ -170,6 +170,11 @@ p {
     background-clip: text;
 }
 
+.global-accent {
+    -webkit-text-fill-color: var(--gold);
+    background: none;
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
