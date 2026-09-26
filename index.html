@@ -85,6 +85,7 @@
                 <li class="nav-item"><a href="#home"       class="nav-link">Studio</a></li>
                 <li class="nav-item"><a href="#about"      class="nav-link">Our Story</a></li>
                 <li class="nav-item"><a href="#services"   class="nav-link">Expertise</a></li>
+                <li class="nav-item"><a href="#upcoming"   class="nav-link">Upcoming</a></li>
                 <li class="nav-item"><a href="#pricing"    class="nav-link">Investment</a></li>
                 <li class="nav-item"><a href="#projects"   class="nav-link">Portfolio</a></li>
                 <li class="nav-item"><a href="#clients"    class="nav-link">Partners</a></li>
@@ -213,6 +214,51 @@
                     <div class="service-icon"><i class="fas fa-palette"></i></div>
                     <h3>Event Branding & Creative Services</h3>
                     <p>Creative design and branding solutions that bring your event vision to life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section id="upcoming" class="upcoming-events">
+        <div class="container">
+            <div class="section-header">
+                <h2>Upcoming Events</h2>
+                <p>Signature experiences we're bringing to life next</p>
+            </div>
+
+            <div class="deb-card">
+                <div class="deb-date-block">
+                    <span class="deb-date-tag">Upcoming</span>
+                    <span class="deb-month">November</span>
+                    <span class="deb-day">14</span>
+                    <span class="deb-year">2026</span>
+                    <span class="deb-countdown"><strong id="deb-days">—</strong> days to go</span>
+                </div>
+                <div class="deb-content">
+                    <div class="deb-eyebrow">Global Vantage View presents</div>
+                    <h3 class="deb-title">
+                        Dîner en Blanc
+                        <span class="deb-title-accent">Port of Spain 2026</span>
+                    </h3>
+                    <p class="deb-tagline">
+                        A global culinary phenomenon arrives in Trinidad &amp; Tobago. Thousands dressed in white,
+                        one secret location, an unforgettable open-air feast under the Caribbean sky.
+                    </p>
+                    <div class="deb-features">
+                        <span class="deb-feature"><i class="fas fa-tshirt"></i> All-White Attire</span>
+                        <span class="deb-feature"><i class="fas fa-map-marker-alt"></i> Secret Location</span>
+                        <span class="deb-feature"><i class="fas fa-glass-cheers"></i> Chic Picnic en Masse</span>
+                        <span class="deb-feature"><i class="fas fa-globe"></i> Global Tradition, Caribbean Flair</span>
+                    </div>
+                    <div class="deb-actions">
+                        <a href="dinerenblanc-portofspain.html" class="btn-deb-primary">
+                            <i class="fas fa-arrow-right"></i> View Event Details
+                        </a>
+                        <a href="https://portofspain.dinerenblanc.com" target="_blank" rel="noopener noreferrer" class="btn-deb-ghost">
+                            <i class="fas fa-user-plus"></i> Join the Waitlist
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -742,5 +788,21 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // DEB Port of Spain 2026 countdown for the homepage card
+        (function() {
+            var target = new Date('2026-11-14T18:00:00-04:00');
+            var el = document.getElementById('deb-days');
+            if (!el) return;
+            function update() {
+                var now = new Date();
+                var diff = target - now;
+                if (diff <= 0) { el.textContent = 'Today'; return; }
+                el.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+            }
+            update();
+            setInterval(update, 60000);
+        })();
+    </script>
 </body>
 </html>
